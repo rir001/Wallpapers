@@ -1,12 +1,13 @@
 import os
 
-def get_cont(num):
-    num = str(num)
-    return '0'*(3-len(num)) + num
 
-cont = 0
+get_cont = lambda num: '0'*(3-len(str(num))) + str(num)
+
+cont = 1
 for entry in os.scandir('.'):
-    cont += 1
-    if entry.is_file():
-        if entry.name != 'rename.py':
+    if entry.is_file() and entry.name != 'rename.py':
+        try:
             os.rename(entry.name, get_cont(cont)+'.jpg')
+            cont += 1
+        except:
+            pass
